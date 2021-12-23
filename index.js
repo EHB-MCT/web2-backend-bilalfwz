@@ -8,7 +8,7 @@ import {
     Database
 } from './databse.js'
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000
 const db = new Database(mongodb.MongoClient, "web2", "shows", "mongodb+srv://bilal:bicbilal1999@cluster0.skntf.mongodb.net/web2?retryWrites=true&w=majority")
 app.use(bodyParser.json())
 app.use(cors())
