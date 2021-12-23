@@ -41,7 +41,33 @@ class Database {
         return newShow
     }
 
+    async updateShow(id, newShow) {
+        const client = await this.mongoclient.connect(this.url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        const db = client.db(this.database).collection(this.collection)
+        let updatedShow = await db.updateOne({
+            _id: id
+        }, {
+            $set: newShow
+        })
+        client.close()
+        return updatedShow
+    }
 
+    async deleteShow(id) {
+        const client = await this.mongoclient.connect(this.url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        const db = client.db(this.database).collection(this.collection)
+        let deletedShow = await db.deleteOne({
+            _id: id
+        })
+        client.close()
+        return deletedShow
+    }
 
 
 

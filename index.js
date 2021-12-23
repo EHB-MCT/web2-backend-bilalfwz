@@ -33,3 +33,17 @@ app.post("/shows/add", async (req, res) => {
     let addedShow = await db.addShow(show)
     res.send(addedShow)
 })
+
+app.put("/shows/update/:id", async (req, res) => {
+    let id = new ObjectId(`${req.params.id}`)
+    let newShow = req.body
+    delete newShow["_id"]
+    let updatedShow = await db.updateShow(id, newShow)
+    res.send(updatedShow)
+})
+
+app.delete("/shows/delete/:id", async (req, res) => {
+    let id = new ObjectId(req.params.id)
+    let deletedShow = await db.deleteShow(id)
+    res.send(deletedShow)
+})
